@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 abstract class UserLocalDataSource {
   Future<UserModel> getUser();
   Future<void> cacheUser(UserModel userToCache);
+  Future<void> deleteUser();
 }
 
 const String cacheUserKey = 'CACHED_USER';
@@ -29,6 +30,16 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
     final jsonString = sharedPreferences.getString(cacheUserKey);
     if (jsonString != null) {
       return Future.value(UserModel.fromCache(json.decode(jsonString)));
+    } else {
+      throw CacheException();
+    }
+  }
+
+  @override
+  Future<void> deleteUser() {
+    final jsonString = sharedPreferences.getString(cacheUserKey);
+    if (jsonString != null) {
+      return sharedPreferences.remove(cacheUserKey);
     } else {
       throw CacheException();
     }

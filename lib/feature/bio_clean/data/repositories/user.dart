@@ -34,6 +34,10 @@ class UserRepositoryImpl extends UserRepository {
           password: password,
         );
 
+        final token = await remoteDataSource.login(phone, password);
+        user.copyWith(token: token);
+        await localDataSource.cacheUser(user);
+
         return Right(user);
       } on ServerException {
         return Left(ServerFailure());
@@ -73,6 +77,16 @@ class UserRepositoryImpl extends UserRepository {
       }
     } else {
       return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> logOut() async {
+    try {
+      await localDataSource.deleteUser();
+      return const Right(null);
+    } on CacheException {
+      return Left(CacheFailure());
     }
   }
 }

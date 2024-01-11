@@ -11,6 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'feature/bio_clean/data/repositories/user.dart';
 import 'feature/bio_clean/domain/repositories/user.dart';
+import 'feature/bio_clean/domain/use_cases/user/logout.dart';
 import 'feature/bio_clean/presentation/bloc/user/user_bloc.dart';
 
 final sl = GetIt.instance;
@@ -22,6 +23,7 @@ Future<void> init() async {
         userCreate: sl(),
         userLogin: sl(),
         userGet: sl(),
+        userLogout: sl(),
       ));
 
   // Use cases
@@ -29,6 +31,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => UserLogin(sl()));
   sl.registerLazySingleton(() => CreateUser(sl()));
   sl.registerLazySingleton(() => GetUser(sl()));
+  sl.registerLazySingleton(() => LogOut(sl()));
 
   // Repository
   sl.registerLazySingleton<UserRepository>(

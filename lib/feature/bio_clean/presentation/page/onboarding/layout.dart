@@ -1,5 +1,6 @@
 import 'package:bio_clean/feature/bio_clean/presentation/bloc/user/user_bloc.dart';
 import 'package:bio_clean/feature/bio_clean/presentation/page/entrance/layout.dart';
+import 'package:bio_clean/feature/bio_clean/presentation/page/home/home.dart';
 import 'package:bio_clean/feature/bio_clean/presentation/page/onboarding/bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -26,8 +27,8 @@ class _OnboardingLayoutState extends State<OnboardingLayout> {
     context.read<UserBloc>().add(const GetUserEvent());
     context.read<UserBloc>().stream.listen((event) {
       if (event.status == UserStatus.success) {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const EntranceLayout()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => const Home()));
       }
     });
   }

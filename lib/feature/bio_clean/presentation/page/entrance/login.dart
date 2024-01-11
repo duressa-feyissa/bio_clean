@@ -38,14 +38,12 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    print(context.read<UserBloc>().state.user);
-    print(context.read<UserBloc>().state.status);
     return BlocListener<UserBloc, UserState>(
       listener: (context, state) {
         if (state.status == UserStatus.failure) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('Invalid phone or password'),
+              content: Center(child: Text('Invalid phone or password')),
               backgroundColor: Colors.red,
             ),
           );
@@ -56,7 +54,7 @@ class _LoginState extends State<Login> {
           passwordController.clear();
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('Login success'),
+              content: Center(child: Text('Login success')),
               backgroundColor: Colors.green,
             ),
           );
