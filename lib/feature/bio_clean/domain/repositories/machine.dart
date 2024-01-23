@@ -10,6 +10,7 @@ abstract class MachineRepository {
 
   Future<Either<Failure, List<Machine>>> getMachines({
     required String userId,
+    required List<String> machinesId,
     required String token,
   });
 
@@ -30,6 +31,19 @@ abstract class MachineRepository {
   });
 
   Future<Either<Failure, Machine>> deleteMachine({
+    required String id,
+    required String token,
+  });
+  Future<Either<Failure, void>> saveMachine({
+    required List<String> ids,
+  });
+  Future<Either<Failure, List<String>>> loadIds();
+
+  Future<Either<Failure, void>> deleteSerial({
+    required String id,
+  });
+
+  Future<Either<Failure, String>> analysis({
     required String id,
     required String token,
   });

@@ -1,10 +1,12 @@
+import 'package:bio_clean/feature/bio_clean/presentation/bloc/machine/machine_bloc.dart';
 import 'package:bio_clean/feature/bio_clean/presentation/bloc/user/user_bloc.dart';
 import 'package:bio_clean/feature/bio_clean/presentation/page/entrance/layout.dart';
-import 'package:bio_clean/feature/bio_clean/presentation/page/home/home.dart';
 import 'package:bio_clean/feature/bio_clean/presentation/page/onboarding/bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../home/home.dart';
 
 class OnboardingLayout extends StatefulWidget {
   const OnboardingLayout({Key? key}) : super(key: key);
@@ -24,6 +26,7 @@ class _OnboardingLayoutState extends State<OnboardingLayout> {
       onPageChanged(_pageController.page!.round());
     });
 
+    context.read<MachineBloc>().add(const LoadMachinesSerialEvent());
     context.read<UserBloc>().add(const GetUserEvent());
     context.read<UserBloc>().stream.listen((event) {
       if (event.status == UserStatus.success) {

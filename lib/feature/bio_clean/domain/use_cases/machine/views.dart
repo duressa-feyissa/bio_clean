@@ -14,19 +14,21 @@ class GetMachines extends UseCase<List<Machine>, Params> {
   @override
   Future<Either<Failure, List<Machine>>> call(Params params) async {
     return await repository.getMachines(
-        userId: params.userId, token: params.token);
+        userId: params.userId, machinesId: params.machinesId, token: params.token);
   }
 }
 
 class Params extends Equatable {
   final String userId;
+  final List<String> machinesId;
   final String token;
 
   const Params({
     required this.userId,
+    required this.machinesId,
     required this.token,
   });
 
   @override
-  List<Object?> get props => [userId, token];
+  List<Object?> get props => [userId, token, machinesId];
 }

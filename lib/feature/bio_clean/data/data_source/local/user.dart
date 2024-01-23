@@ -37,11 +37,28 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
 
   @override
   Future<void> deleteUser() {
-    final jsonString = sharedPreferences.getString(cacheUserKey);
+    var jsonString = sharedPreferences.getString(cacheUserKey);
     if (jsonString != null) {
-      return sharedPreferences.remove(cacheUserKey);
+      sharedPreferences.remove(cacheUserKey);
     } else {
       throw CacheException();
     }
+
+    jsonString = sharedPreferences.getString('CACHED_MACHINE');
+    if (jsonString != null) {
+      sharedPreferences.remove('CACHED_MACHINE');
+    }
+
+    jsonString = sharedPreferences.getString('CACHED_INPUTS');
+    if (jsonString != null) {
+      sharedPreferences.remove('CACHED_INPUTS');
+    }
+
+    jsonString = sharedPreferences.getString('CACHED_IDS');
+    if (jsonString != null) {
+      sharedPreferences.remove('CACHED_IDS');
+    }
+
+    return Future.value();
   }
 }

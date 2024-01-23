@@ -66,9 +66,10 @@ class UserRepositoryImpl extends UserRepository {
           phone,
           password,
         );
-        final user = await remoteDataSource.getUser(token);
+        var user = await remoteDataSource.getUser(token);
 
-        user.copyWith(token: token);
+        user = user.copyWith(token: token);
+
         await localDataSource.cacheUser(user);
 
         return Right(user);

@@ -23,7 +23,8 @@ dependencies:
   stream_transform: ^2.1.0
   get_it: ^7.6.6
   flutter_bloc: ^8.1.3
-
+  uuid: ^4.2.2
+  fl_chart: ^0.40.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -38,5 +39,11 @@ flutter:
     - assets/onboarding/4.png
     - assets/logo.png
     - assets/home_logo.png
+    - assets/background.png
+    - assets/upsplash.png
+    - assets/icons/logo.png
+
 
   uses-material-design: true
+
+
